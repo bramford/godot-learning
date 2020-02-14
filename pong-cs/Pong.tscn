@@ -1,0 +1,101 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Paddle.cs" type="Script" id=1]
+[ext_resource path="res://left_pallete.png" type="Texture" id=2]
+[ext_resource path="res://right_pallete.png" type="Texture" id=3]
+[ext_resource path="res://Ball.cs" type="Script" id=4]
+[ext_resource path="res://ball.png" type="Texture" id=5]
+[ext_resource path="res://Exit.cs" type="Script" id=6]
+[ext_resource path="res://Wall.cs" type="Script" id=7]
+[ext_resource path="res://separator.png" type="Texture" id=8]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 4, 16 )
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 5.0
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 5, 300 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 512, 5 )
+
+[node name="Pong" type="Node2D"]
+
+[node name="leftPaddle" type="Area2D" parent="."]
+position = Vector2( 100, 300 )
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="leftPaddle"]
+scale = Vector2( 1, 2 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="leftPaddle"]
+scale = Vector2( 1, 2 )
+shape = SubResource( 1 )
+
+[node name="rightPaddle" type="Area2D" parent="."]
+position = Vector2( 924, 300 )
+script = ExtResource( 1 )
+ballDirection = -1
+
+[node name="Sprite" type="Sprite" parent="rightPaddle"]
+scale = Vector2( 1, 2 )
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="rightPaddle"]
+scale = Vector2( 1, 2 )
+shape = SubResource( 1 )
+
+[node name="ball" type="Area2D" parent="."]
+position = Vector2( 512, 300 )
+script = ExtResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="ball"]
+scale = Vector2( 2, 2 )
+texture = ExtResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ball"]
+scale = Vector2( 2, 2 )
+shape = SubResource( 2 )
+
+[node name="leftExit" type="Area2D" parent="."]
+position = Vector2( 0, 300 )
+script = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="leftExit"]
+shape = SubResource( 3 )
+
+[node name="rightExit" type="Area2D" parent="."]
+position = Vector2( 1024, 300 )
+script = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="rightExit"]
+shape = SubResource( 3 )
+
+[node name="topWall" type="Area2D" parent="."]
+position = Vector2( 512, 0 )
+script = ExtResource( 7 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="topWall"]
+shape = SubResource( 4 )
+
+[node name="bottomWall" type="Area2D" parent="."]
+position = Vector2( 512, 600 )
+script = ExtResource( 7 )
+yDirection = -1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bottomWall"]
+shape = SubResource( 4 )
+
+[node name="separator" type="Sprite" parent="."]
+position = Vector2( 512, 300 )
+scale = Vector2( 1, 1.5 )
+texture = ExtResource( 8 )
+[connection signal="area_entered" from="leftPaddle" to="leftPaddle" method="OnPaddleAreaEntered"]
+[connection signal="area_entered" from="rightPaddle" to="rightPaddle" method="OnPaddleAreaEntered"]
+[connection signal="area_entered" from="leftExit" to="leftExit" method="OnExitAreaEntered"]
+[connection signal="area_entered" from="rightExit" to="rightExit" method="OnExitAreaEntered"]
+[connection signal="area_entered" from="topWall" to="topWall" method="OnWallAreaEntered"]
+[connection signal="area_entered" from="bottomWall" to="bottomWall" method="OnWallAreaEntered"]

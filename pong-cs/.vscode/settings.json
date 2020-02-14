@@ -1,0 +1,4 @@
+{
+    "FSharp.fsacRuntime": "net",
+    "csharp.suppressDotnetInstallWarning": true
+}
