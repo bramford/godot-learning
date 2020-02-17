@@ -4,7 +4,7 @@ public class Ball : Area2D
 {
 
     [Export]
-    private int speed = 250;
+    private int speed = 500;
     [Export]
     private Vector2 initialPosition = new Vector2(512, 300);
     [Export]

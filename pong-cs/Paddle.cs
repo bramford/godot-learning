@@ -8,7 +8,7 @@ public class Paddle : Area2D
     private static readonly String INPUT_MOVE_UP_SUFFIX = "MoveUp";
     private static readonly String INPUT_MOVE_DOWN_SUFFIX = "MoveDown";
     [Export]
-    private int speed = 250;
+    private int speed = 500;
     [Export]
     private int ballDirection = 1;
     private RandomNumberGenerator randomNumberGenerator;
