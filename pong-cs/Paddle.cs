@@ -5,8 +5,12 @@ public class Paddle : Area2D
 {
 
     private static readonly String INPUT_ROTATE_SUFFIX = "Rotate";
+    private static readonly String INPUT_INCREASE_WIDTH_SUFFIX = "IncreaseWidth";
+    private static readonly String INPUT_DECREASE_WIDTH_SUFFIX = "DecreaseWidth";
     private static readonly String INPUT_MOVE_UP_SUFFIX = "MoveUp";
     private static readonly String INPUT_MOVE_DOWN_SUFFIX = "MoveDown";
+    private static readonly int minWidth = 1;
+    private static readonly int maxWidth = 5;
     [Export]
     private int speed = 500;
     [Export]
@@ -23,6 +27,26 @@ public class Paddle : Area2D
         String name = GetName();
         Vector2 currentPosition = GetPosition();
         var rotation = GetRotationDegrees();
+
+        if (Input.IsActionJustReleased(name + INPUT_INCREASE_WIDTH_SUFFIX))
+        {
+            var scale = GetScale();
+            if (scale.y < maxWidth)
+            {
+                scale.y += 1;
+                SetScale(scale);
+            }
+        }
+
+        if (Input.IsActionJustReleased(name + INPUT_DECREASE_WIDTH_SUFFIX))
+        {
+            var scale = GetScale();
+            if (scale.y > minWidth)
+            {
+                scale.y -= 1;
+                SetScale(scale);
+            }
+        }
 
         if (Input.IsActionJustReleased(name + INPUT_ROTATE_SUFFIX))
         {
