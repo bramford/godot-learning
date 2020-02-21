@@ -12,7 +12,7 @@ public class Paddle : Area2D
     private static readonly int minWidth = 1;
     private static readonly int maxWidth = 5;
     [Export]
-    private int speed = 500;
+    private int speed = 1000;
     [Export]
     private int ballDirection = 1;
     private RandomNumberGenerator randomNumberGenerator;
